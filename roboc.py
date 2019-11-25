@@ -54,11 +54,10 @@ while continuer:
     with open(carte_sauve, "wb") as sauvegarde_en_cours:
         sauvegarde_pickler = pickle.Pickler(sauvegarde_en_cours)
         sauvegarde_pickler.dump(avancement)
-
-"""    avancement1 = list(avancement)
-    if "U" not in avancement1:
+    fin = list(avancement)
+    if "U" not in fin:
         continuer = False
-    avancement = "".join(avancement1)"""
+    fin = "".join(fin)
 
 print("Fin de la partie")
 
