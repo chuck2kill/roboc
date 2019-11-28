@@ -64,37 +64,42 @@ def deplacement(carte_sauve, carte_depart):
 
     lettre = input("Choisissez le déplacement :\n").lower()
     if lettre == "n":
-        liste_reference[liste_reference.index("X")] = " "
-        liste_reference[index_provisoire - index_ligne - 1] = "X"
-        if liste_reference[index_provisoire - index_ligne - 1] in index_ref:
+        if (index_provisoire - index_ligne - 1) in index_ref:
             mur = True
-        else:
-            carte_sauve1 = "".join(liste_reference)
-            return carte_sauve1
     elif lettre == "s":
-        liste_reference[liste_reference.index("X")] = " "
-        liste_reference[index_provisoire + index_ligne + 1] = "X"
-        if liste_reference[index_provisoire + index_ligne + 1] in index_ref:
+        if (index_provisoire + index_ligne + 1) in index_ref:
             mur = True
-        else:
-            carte_sauve1 = "".join(liste_reference)
-            return carte_sauve1
-    elif lettre == "o":
-        liste_reference[liste_reference.index("X")] = " "
-        liste_reference[index_provisoire - 1] = "X"
-        if liste_reference[index_provisoire - 1] in index_ref:
+    elif lettre ==  "o":
+        if (index_provisoire - 1) in index_ref:
             mur = True
-        else:
-            carte_sauve1 = "".join(liste_reference)
-            return carte_sauve1
     elif lettre == "e":
-        liste_reference[liste_reference.index("X")] = " "
-        liste_reference[index_provisoire + 1] = "X"
-        if liste_reference[index_provisoire + 1] in index_ref:
+        if (index_provisoire + 1) in index_ref:
             mur = True
-        else:
-            carte_sauve1 = "".join(liste_reference)
-            return carte_sauve1
     else:
         print("Choisissez une direction valide (n, s, e, o")
+
+
+    while mur is False:
+        if lettre == "n":
+            liste_reference[liste_reference.index("X")] = " "
+            liste_reference[index_provisoire - index_ligne - 1] = "X"
+            carte_sauve1 = "".join(liste_reference)
+            return carte_sauve1
+        elif lettre == "s":
+            liste_reference[liste_reference.index("X")] = " "
+            liste_reference[index_provisoire + index_ligne + 1] = "X"
+            carte_sauve1 = "".join(liste_reference)
+            return carte_sauve1
+        elif lettre == "o":
+            liste_reference[liste_reference.index("X")] = " "
+            liste_reference[index_provisoire - 1] = "X"
+            carte_sauve1 = "".join(liste_reference)
+            return carte_sauve1
+        elif lettre == "e":
+            liste_reference[liste_reference.index("X")] = " "
+            liste_reference[index_provisoire + 1] = "X"
+            carte_sauve1 = "".join(liste_reference)
+            return carte_sauve1
+    print("Vous ne pouvez pas traverser ce mur !")
+    return carte_provisoire
 
