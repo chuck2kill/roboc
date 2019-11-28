@@ -57,27 +57,44 @@ def deplacement(carte_sauve, carte_depart):
     # On cherche l'index de '\n'
     index_ligne = liste_reference.index("\n")
 
+    # On cherche les indices des 'O'
+    index_ref = [i for i, e in enumerate(liste_reference) if e == "O"]
+
+    mur = False
+
     lettre = input("Choisissez le déplacement :\n").lower()
     if lettre == "n":
         liste_reference[liste_reference.index("X")] = " "
         liste_reference[index_provisoire - index_ligne - 1] = "X"
-        carte_sauve1 = "".join(liste_reference)
-        return carte_sauve1
+        if liste_reference[index_provisoire - index_ligne - 1] in index_ref:
+            mur = True
+        else:
+            carte_sauve1 = "".join(liste_reference)
+            return carte_sauve1
     elif lettre == "s":
         liste_reference[liste_reference.index("X")] = " "
         liste_reference[index_provisoire + index_ligne + 1] = "X"
-        carte_sauve1 = "".join(liste_reference)
-        return carte_sauve1
+        if liste_reference[index_provisoire + index_ligne + 1] in index_ref:
+            mur = True
+        else:
+            carte_sauve1 = "".join(liste_reference)
+            return carte_sauve1
     elif lettre == "o":
         liste_reference[liste_reference.index("X")] = " "
         liste_reference[index_provisoire - 1] = "X"
-        carte_sauve1 = "".join(liste_reference)
-        return carte_sauve1
+        if liste_reference[index_provisoire - 1] in index_ref:
+            mur = True
+        else:
+            carte_sauve1 = "".join(liste_reference)
+            return carte_sauve1
     elif lettre == "e":
         liste_reference[liste_reference.index("X")] = " "
         liste_reference[index_provisoire + 1] = "X"
-        carte_sauve1 = "".join(liste_reference)
-        return carte_sauve1
+        if liste_reference[index_provisoire + 1] in index_ref:
+            mur = True
+        else:
+            carte_sauve1 = "".join(liste_reference)
+            return carte_sauve1
     else:
         print("Choisissez une direction valide (n, s, e, o")
 
