@@ -6,7 +6,6 @@ du jeu roboc"""
 import os
 from fonctions import *
 import pickle
-from carte import Carte
 
 # On charge les cartes existantes
 cartes = []
@@ -18,7 +17,6 @@ for nom_fichier in os.listdir("cartes"):
         with open(chemin, "r") as fichier:
             contenu.append(fichier.read())
         cartes.append(nom_carte)
-            # Création d'une carte, à compléter
 
 # On affiche les cartes existantes
 print("Labyrinthes existants :")
@@ -27,9 +25,17 @@ for i, carte in enumerate(cartes):
 
 # On demande la carte choisie
 nb_cartes = len(cartes)
-choix = int(input("Quelle carte choisissez-vous : ?\n"))
-if choix < nb_cartes + 1:
-    print(contenu[choix - 1])
+
+# On teste pour que la variable entrée soit de type int et qu'elle soit dans le bon intervalle
+while True:
+    try:
+        choix = int(input("Quelle carte choisissez-vous : ?\n"))
+        assert choix < nb_cartes + 1
+        break
+    except ValueError:
+        print("Entrez un nombre s'il vous-plaît")
+    except AssertionError:
+        print("Vous devez choisir un chiffre entre 1 et {}".format(nb_cartes))
 
 carte_choisie = "cartes/" + cartes[choix - 1] + ".txt"
 carte_sauve = "sauvegarde/" + cartes[choix - 1] + ".txt"
@@ -40,6 +46,18 @@ touche = input("Si vous voulez afficher les règles du jeu, appuyez sur r\n"
 
 if touche == "r":
     print(regles())
+
+# On vérifie si une partie est sauvegardée
+
+if os.path.exists(carte_sauve):
+    partie_sauvee = input("Une partie est en cours, voulez-vous la reprendre (o/n)").lower()
+    if partie_sauvee == "o":
+        print(recup(carte_sauve))  # On charge la sauvegarde
+    else:
+        with open(carte_choisie, 'r') as carte_lue:
+            texte = carte_lue.read()
+        enregistrement(texte, carte_sauve)
+        print(recup(carte_sauve))
 else:
     with open(carte_choisie, 'r') as carte_lue:
         texte = carte_lue.read()
@@ -60,14 +78,6 @@ while continuer:
     fin = "".join(fin)
 
 print("Fin de la partie")
+os.remove(carte_sauve)
 
 os.system("pause")
-
-
-
-
-# Si il y a une partie sauvegardée, on l'affiche, à compléter
-
-
-
-# ...
