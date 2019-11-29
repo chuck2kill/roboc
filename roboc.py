@@ -23,7 +23,7 @@ print("Labyrinthes existants :")
 for i, carte in enumerate(cartes):
     print(" {} - {}".format(i + 1, carte))
 
-# On demande la carte choisie
+""" On demande la carte choisie"""
 nb_cartes = len(cartes)
 
 # On teste pour que la variable entrée soit de type int et qu'elle soit dans le bon intervalle
